@@ -1,0 +1,39 @@
+
+this_makefile := ${lastword ${MAKEFILE_LIST}}
+SHELL = @bash@ -o pipefail -o errexit -o nounset -o errtrace
+.SECONDARY:
+
+# RDDL says where to download everything; located at http://www.w3.org/2001/XMLSchema
+
+# autoconf/configure standard things
+srcdir = @srcdir@
+
+# custom things from autoconf/configure
+schematron_compile = @schematron_compile@
+curl = @curl@
+
+all_files = \
+  ${srcdir}/catalog.dtd \
+  ${srcdir}/catalog.rng \
+  ${srcdir}/catalog.xsd \
+  ${srcdir}/xml-catalog.sch.xsl \
+
+.PHONY: all
+all: ${all_files}
+
+${srcdir}/catalog.dtd:
+	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.dtd"
+
+${srcdir}/catalog.rng:
+	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.rng"
+
+${srcdir}/catalog.xsd:
+	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.xsd"
+
+.PHONY: purge
+purge:
+	${RM} ${all_files}
+
+%.sch.xsl: %.sch
+	${schematron_compile} --output-file=$@ $<
+
