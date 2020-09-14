@@ -1,4 +1,4 @@
-<!-- $Id: catalog.dtd,v 1.10 2002/10/18 23:54:58 ndw Exp $ -->
+<!-- $Id: catalog.dtd,v 1.14 2005/04/13 20:47:06 ndw Exp $ -->
 
 <!ENTITY % pubIdChars "CDATA">
 <!ENTITY % publicIdentifier "%pubIdChars;">
@@ -17,6 +17,8 @@
 <!ENTITY % uri "%p;uri">
 <!ENTITY % rewriteSystem "%p;rewriteSystem">
 <!ENTITY % rewriteURI "%p;rewriteURI">
+<!ENTITY % systemSuffix "%p;systemSuffix">
+<!ENTITY % uriSuffix "%p;uriSuffix">
 <!ENTITY % delegatePublic "%p;delegatePublic">
 <!ENTITY % delegateSystem "%p;delegateSystem">
 <!ENTITY % delegateURI "%p;delegateURI">
@@ -28,11 +30,13 @@
 
 <!ELEMENT %catalog; (%public;|%system;|%uri;
                      |%rewriteSystem;|%rewriteURI;
+		     |%systemSuffix;|%uriSuffix;
                      |%delegatePublic;|%delegateSystem;|%delegateURI;
                      |%nextCatalog;|%group; %local.catalog.mix;)+>
 <!ATTLIST %catalog;
 	%nsdecl;	%uriReference;		#FIXED
 		'urn:oasis:names:tc:entity:xmlns:xml:catalog'
+	id		ID			#IMPLIED
 	prefer		%systemOrPublic;	#IMPLIED
 	xml:base	%uriReference;		#IMPLIED
 	%local.catalog.attribs;
@@ -91,6 +95,26 @@
         %local.rewriteURI.attribs;
 >
 
+<!ENTITY % local.systemSuffix.attribs "">
+
+<!ELEMENT %systemSuffix; EMPTY>
+<!ATTLIST %systemSuffix;
+	id		ID			#IMPLIED
+	systemIdSuffix		%string;	#REQUIRED
+	uri			%string;	#REQUIRED
+        %local.systemSuffix.attribs;
+>
+
+<!ENTITY % local.uriSuffix.attribs "">
+
+<!ELEMENT %uriSuffix; EMPTY>
+<!ATTLIST %uriSuffix;
+	id		ID			#IMPLIED
+	uriSuffix		%string;	#REQUIRED
+	uri			%string;	#REQUIRED
+        %local.uriSuffix.attribs;
+>
+
 <!ENTITY % local.delegatePublic.attribs "">
 
 <!ELEMENT %delegatePublic; EMPTY>
@@ -139,6 +163,7 @@
 
 <!ELEMENT %group; (%public;|%system;|%uri;
                    |%rewriteSystem;|%rewriteURI;
+		   |%systemSuffix;|%uriSuffix;
                    |%delegatePublic;|%delegateSystem;|%delegateURI;
                    |%nextCatalog; %local.group.mix;)+>
 <!ATTLIST %group;
