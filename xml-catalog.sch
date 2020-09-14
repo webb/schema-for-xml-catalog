@@ -60,7 +60,7 @@
               >Document element xs:schema of referenced XML Schema document must have @targetNamespace.</assert>
 
     </rule>
-    <rule context="catalog:uri[exists(@uri) and ends-with(@uri, '.xsd')]">
+    <rule context="catalog:uri[exists(@uri) and ends-with(@uri, '.csv')]">
       
       <let name="uri" value="resolve-uri(@uri, base-uri(.))"/>
 

@@ -417,11 +417,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="catalog:uri[exists(@uri) and ends-with(@uri, '.xsd')]"
+   <xsl:template match="catalog:uri[exists(@uri) and ends-with(@uri, '.csv')]"
                  priority="1000"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="catalog:uri[exists(@uri) and ends-with(@uri, '.xsd')]"/>
+                       context="catalog:uri[exists(@uri) and ends-with(@uri, '.csv')]"/>
       <xsl:variable name="uri" select="resolve-uri(@uri, base-uri(.))"/>
 
 		    <!--ASSERT -->
