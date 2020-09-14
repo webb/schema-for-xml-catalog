@@ -5,8 +5,9 @@ AC_INIT([Schema for XML Catalogs],[0],[https://github.com/webb/schema-for-xml-ca
 
 # Checks for programs.
 # AC_PROG_INSTALL
-# AC_PROG_MKDIR_P
 # AC_PROG_SED
+
+AC_PROG_MKDIR_P
 
 # AC_PATH_PROG(var,prog)
 # test "x$var" = "x" && AC_MSG_ERROR([var not found])

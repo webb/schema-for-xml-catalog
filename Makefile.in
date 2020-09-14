@@ -7,28 +7,34 @@ SHELL = @bash@ -o pipefail -o errexit -o nounset -o errtrace
 
 # autoconf/configure standard things
 srcdir = @srcdir@
+MKDIR_P = @MKDIR_P@
 
 # custom things from autoconf/configure
 schematron_compile = @schematron_compile@
 curl = @curl@
 
 all_files = \
-  ${srcdir}/catalog.dtd \
-  ${srcdir}/catalog.rng \
-  ${srcdir}/catalog.xsd \
+  ${srcdir}/1.0/catalog.dtd \
+  ${srcdir}/1.0/catalog.rlx \
+  ${srcdir}/1.0/catalog.rng \
+  ${srcdir}/1.0/catalog.trex \
+  ${srcdir}/1.0/catalog.xsd \
+  ${srcdir}/1.1/catalog.dtd \
+  ${srcdir}/1.1/catalog.rnc \
+  ${srcdir}/1.1/catalog.rng \
+  ${srcdir}/1.1/catalog.xsd \
   ${srcdir}/xml-catalog.sch.xsl \
 
 .PHONY: all
 all: ${all_files}
 
-${srcdir}/catalog.dtd:
-	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.dtd"
+${srcdir}/1.0/%:
+	${MKDIR_P} ${dir $@}
+	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.0/$*"
 
-${srcdir}/catalog.rng:
-	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.rng"
-
-${srcdir}/catalog.xsd:
-	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/catalog.xsd"
+${srcdir}/1.1/%:
+	${MKDIR_P} ${dir $@}
+	@curl@ -o $@ "http://www.oasis-open.org/committees/entity/release/1.1/$*"
 
 .PHONY: purge
 purge:
