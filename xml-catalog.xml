@@ -8,7 +8,7 @@
 
   <public publicID="-//OASIS//DTD XML Catalogs V1.1//EN" uri="1.1/catalog.dtd"/>
   <uri name="http://www.oasis-open.org/committees/entity/release/1.1/catalog.dtd" uri="1.1/catalog.dtd"/>
-  <uri name="urn:oasis:names:tc:entity:xmlns:xml:catalog" uri="catalog.xsd"/>
+  <uri name="urn:oasis:names:tc:entity:xmlns:xml:catalog" uri="1.1/catalog.xsd"/>
 
   <!-- catalog version 1.0 -->
 
